@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vue.dao.MemberRepository">
+	<select id="loginMember" 
+	        parameterType="com.vue.vo.Member"
+	        resultType="com.vue.vo.Member">
+		SELECT 
+			   USER_NO userNo,
+		       USER_ID userId, 
+		       USER_PWD userPwd, 
+		       USER_NAME userName,
+		       ENROLL_DATE enrollDate,
+		       MODIFY_DATE modifyDate
+		  FROM 
+		       MEMBER WHERE USER_ID = #{userId} AND USER_PWD = #{userPwd}
+	</select>
+	<select id="joinIdCheck" 
+	        parameterType="com.vue.vo.Member"
+	        resultType="com.vue.vo.Member">
+		SELECT 
+			   USER_NO userNo,
+		       USER_ID userId, 
+		       USER_PWD userPwd, 
+		       USER_NAME userName,
+		       ENROLL_DATE enrollDate,
+		       MODIFY_DATE modifyDate
+		  FROM 
+		       MEMBER WHERE USER_ID = #{userId}
+	</select>
+	<insert id="joinMember" parameterType="com.vue.vo.Member">
+		INSERT 
+		  INTO 
+		       MEMBER 
+		VALUES
+               (SEQ_UNO.NEXTVAL,
+                #{userId},
+                #{userPwd},
+                #{userName},
+                SYSDATE,
+                SYSDATE)
+	</insert>
+</mapper>
